@@ -30,7 +30,7 @@
                             v-bind:key="op.id"
                             @click="calc(op.opp)"
                     >
-                        {{op}}
+                        {{op.opp}}
                     </p>
 
                     <p
@@ -53,9 +53,9 @@
                 displayResult: 0,
                 result: 0,
                 ops: [
-                    {id: 1, opp: '-'},
-                    {id: 2, opp: '+'},
-                    {id: 3, opp: '='}
+                    {id: 10, opp: '-'},
+                    {id: 11, opp: '+'},
+                    {id: 12, opp: '='}
                 ],
                 numbers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
                 operator: ''
