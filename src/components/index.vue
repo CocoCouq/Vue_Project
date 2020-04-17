@@ -19,7 +19,7 @@
         },
         data () {
             return {
-                msg: 'Welcome'
+                msg: 'Arcade'
             }
         }
     }
