@@ -2,8 +2,11 @@
 // Globals variables
 let scoreText
 let score = 0
+let life = 3
+let lifePosition = 40
 let pokeCount = 6
 let gameOverText
+let restartText
 
 // Start Scene
 const startScene = new Phaser.Class({
@@ -34,7 +37,7 @@ const startScene = new Phaser.Class({
         this.logo = this.add.image(400, 250, 'logoCatcher')
         this.title = this.add.image(400, 100, 'titleCatcher').setScale(0.4)
         this.btnStart = this.add.text(70, 350, `Cliquez sur l'écran pour commencer`, {fontSize: '32px', fill: 'rgba(17,17,17)'})
-        this.rules = this.add.text(70, 400, `Objectifs :\nAttrappez 6 pokemons avec seulement 4 pokeballs\nNe laissez pas les pokémons s'enfuir`, {fontSize: '20px', fill: 'rgba(255,255,255,0.71)'})
+        this.rules = this.add.text(70, 400, `Objectifs :\nAttrappez 6 pokemons avec seulement 3 pokeballs\nNe laissez pas les pokémons s'enfuir`, {fontSize: '20px', fill: 'rgba(255,255,255)'})
     },
     update: function () {
     }
@@ -55,8 +58,6 @@ const pokeCatcher = new Phaser.Class({
         this.poke5
         this.poke6
         this.tabLife = []
-        this.lifePosition = 40
-        this.life = 3
         this.cursor
 
     },
@@ -111,18 +112,19 @@ const pokeCatcher = new Phaser.Class({
         // Score display
         let i = 0;
         scoreText = this.add.text(16, 16, `Pokémons: ${score}`, {fontSize: '32px', fill: 'rgba(17,17,17,0.71)'})
-        while (i < this.life) {
-            this.tabLife[i++] = this.add.image(this.lifePosition, 65, 'life')
-            this.lifePosition += 50
+        while (i < life) {
+            this.tabLife[i++] = this.add.image(lifePosition, 65, 'life')
+            lifePosition += 50
         }
         // Game Over Display
-        gameOverText = this.add.text(50, 200, ``, {fontSize: '32px', fill: 'rgba(17,17,17,0.71)'})
-        gameOverTitle = this.add.text(250, 100, ``, {fontSize: '50px', fill: 'rgba(17,17,17,0.71)'})
+        gameOverText = this.add.text(50, 200, ``, {fontSize: '32px', fill: 'rgba(17,17,17)'})
+        gameOverTitle = this.add.text(250, 100, ``, {fontSize: '50px', fill: 'rgba(17,17,17)'})
+        restartText = this.add.text(200, 400, ``, {fontSize: '20px', fill: 'rgba(255,255,255)'})
     },
 
     update: function () {
         // Check if win
-        if (this.life > -1 && pokeCount == 0) {
+        if (life > -1 && pokeCount == 0) {
             gameWin(this)
         }
 
@@ -195,18 +197,25 @@ function endGame(context)
     context.poke4.disableBody(true, true)
     context.poke5.disableBody(true, true)
     context.poke6.disableBody(true, true)
+    // If player click, restart game
+    context.input.on('pointerup', function (pointer) {
+        context.scene.start('pokeCatcher');
+    }, context);
 }
 
 // GAME OVER
 function gameOver(context)
 {
-    if (context.life > 0){
-        context.tabLife[--context.life].visible = false
-    }
-    else{
+    context.tabLife[--life].visible = false
+    if (life < 1){
         endGame(context)
         gameOverText.setText(`T'es pas le meilleur dresseur\nC'est indégniable\nRetourne cirer les pompes d'Ondine !!\n\nT'es pas à la hauteur gamin..`)
         gameOverTitle.setText(`GAME OVER`)
+        restartText.setText(`Cliquez sur l'écran pour rejouer`)
+        life = 3
+        pokeCount = 6
+        score = 0
+        lifePosition = 40
     }
 }
 
@@ -216,6 +225,12 @@ function gameWin(context)
     endGame(context)
     gameOverText.setText(`Ma Zette\n\nTu sais dégainer tes balls !!`)
     gameOverTitle.setText(`YOU WIN !!`)
+    restartText.setText(`Cliquez sur l'écran pour rejouer`)
+    life = 3
+    pokeCount = 6
+    score = 0
+    lifePosition = 40
+
 }
 
 // Hit Paddle for rebounds seem reals

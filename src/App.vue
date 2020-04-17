@@ -5,7 +5,7 @@
     <magic v-if="appMag"></magic>
     <calculator v-if="appCal"></calculator>
     <changebox v-if="appInt"></changebox>
-    <pokecatcher v-if="pokeCatcher"></pokecatcher>
+    <pokecatcher></pokecatcher>
   </div>
 </template>
 
