@@ -5,6 +5,7 @@
     <magic v-if="appMag"></magic>
     <calculator v-if="appCal"></calculator>
     <changebox v-if="appInt"></changebox>
+    <pokecatcher v-if="pokeCatcher"></pokecatcher>
   </div>
 </template>
 
@@ -14,6 +15,8 @@
   import magic from './components/magic'
   import calculator from './components/calculator'
   import changebox from './components/interface'
+  import pokecatcher from './components/pokecatcher'
+
   export default {
     name: 'App',
     components: {
@@ -21,14 +24,16 @@
       addition,
       magic,
       calculator,
-      changebox
+      changebox,
+      pokecatcher
     },
     data () {
       return {
         appAdd: false,
         appMag: false,
         appCal: false,
-        appInt: false
+        appInt: false,
+        pokecatcher: false
       }
     }
   }
@@ -42,5 +47,11 @@
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+  }
+  canvas{
+    border: red solid !important;
+    width: 60vw;
+    height: auto;
+    margin-left: 20vw;
   }
 </style>

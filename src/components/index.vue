@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col s3">
-            <img class="responsive-img" src="../assets/logo.png">
+            <img class="responsive-img" src="../assets/images/logo.png">
         </div>
         <div class="col s6 offset-s1">
             <h1>{{ msg }}</h1>
