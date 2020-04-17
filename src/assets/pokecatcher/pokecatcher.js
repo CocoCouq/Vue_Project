@@ -18,6 +18,7 @@ const startScene = new Phaser.Class({
         this.title
         this.btnStart
         this.rules
+        this.pad
     },
     preload: function () {
         // Add custom materialise class for html canvas
@@ -34,10 +35,11 @@ const startScene = new Phaser.Class({
         this.input.on('pointerup', function (pointer) {
             this.scene.start('pokeCatcher');
         }, this);
-        this.logo = this.add.image(400, 250, 'logoCatcher')
-        this.title = this.add.image(400, 100, 'titleCatcher').setScale(0.4)
-        this.btnStart = this.add.text(70, 350, `Cliquez sur l'écran pour commencer`, {fontSize: '32px', fill: 'rgba(17,17,17)'})
-        this.rules = this.add.text(70, 400, `Objectifs :\nAttrappez 6 pokemons avec seulement 3 pokeballs\nNe laissez pas les pokémons s'enfuir`, {fontSize: '20px', fill: 'rgba(255,255,255)'})
+        this.logo = this.add.image(400, 200, 'logoCatcher')
+        this.title = this.add.image(400, 80, 'titleCatcher').setScale(0.4)
+        this.btnStart = this.add.text(70, 300, `Cliquez sur l'écran pour commencer`, {fontSize: '32px', fill: 'rgba(17,17,17)'})
+        this.rules = this.add.text(70, 350, `Objectifs :\nAttrappez 6 pokemons avec seulement 3 pokeballs\nNe laissez pas les pokémons s'enfuir`, {fontSize: '20px', fill: 'rgba(255,255,255)'})
+        this.pad = this.add.text(280, 450, `← Gauche      Droite →\n↑ Accelerer   Ralentir ↓`, {fontSize: '15px', fill: 'rgba(255,255,255)'})
     },
     update: function () {
     }
@@ -130,22 +132,30 @@ const pokeCatcher = new Phaser.Class({
 
         // Velocity Speeder
         let xVelocity = this.ball.body.velocity.x
-        if (xVelocity < 400 && xVelocity > -400) {
-            xVelocity = xVelocity > 0 ? xVelocity + 0.5 : xVelocity - 0.5
-        }
+        let xVelocityUp = xVelocity;
+        let xVelocityDown = xVelocity;
         let yVelocity = this.ball.body.velocity.y
-        if (yVelocity < 400 && yVelocity > -400) {
-            yVelocity = yVelocity > 0 ? yVelocity + 0.5 : yVelocity - 0.5
+        let yVelocityUp = yVelocity;
+        let yVelocityDown = yVelocity;
+        if (xVelocity < 400 && xVelocity > -400 && yVelocity < 400 && yVelocity > -400) {
+            xVelocityUp = xVelocity > 0 ? xVelocity + 10 : xVelocity - 10
+            xVelocityDown = xVelocity > 0 ? xVelocity - 10 : xVelocity + 10
+            yVelocityUp = yVelocity > 0 ? yVelocity + 10 : yVelocity - 10
+            yVelocityDown = yVelocity > 0 ? yVelocity - 10 : yVelocity + 10
         }
 
         // Keyboard Controls
         if (this.cursor.left.isDown) {
             this.paddle.setVelocity(-800, 0)
-            this.ball.setVelocity(xVelocity, yVelocity)
         }
         if (this.cursor.right.isDown) {
             this.paddle.setVelocity(800, 0)
-            this.ball.setVelocity(xVelocity, yVelocity)
+        }
+        if (this.cursor.up.isDown) {
+            this.ball.setVelocity(xVelocityUp, yVelocityUp)
+        }
+        if (this.cursor.down.isDown) {
+            this.ball.setVelocity(xVelocityDown, yVelocityDown)
         }
         if (this.cursor.right.isUp && this.cursor.left.isUp) {
             this.paddle.setVelocity(0, 0)

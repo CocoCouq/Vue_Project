@@ -9,7 +9,7 @@
                 >
                     <i class="material-icons" v-on:click="btnN.actionBtn">{{btnN.icon}}</i>
                 </li>
-                <li class="red lighten-2 col s12" @click="pokeFunction">
+                <li class="blue-grey darken-2 col s12" @click="pokeFunction">
                     <img
                             id="pokeCatcher"
                             class="responsive-img"

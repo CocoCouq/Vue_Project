@@ -49,9 +49,10 @@
     margin-top: 60px;
   }
   canvas{
-    border: red solid !important;
+    border: #427898 solid 3px !important;
     width: 60vw;
     height: auto;
     margin-left: 20vw;
+    box-shadow: 2px 3px #8ee88e;
   }
 </style>
