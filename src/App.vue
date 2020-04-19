@@ -6,6 +6,7 @@
     <calculator v-if="appCal"></calculator>
     <changebox v-if="appInt"></changebox>
     <pokecatcher></pokecatcher>
+    <pokerunner></pokerunner>
   </div>
 </template>
 
@@ -16,6 +17,7 @@
   import calculator from './components/calculator'
   import changebox from './components/interface'
   import pokecatcher from './components/pokecatcher'
+  import pokerunner from "./components/pokerunner"
 
   export default {
     name: 'App',
@@ -25,7 +27,8 @@
       magic,
       calculator,
       changebox,
-      pokecatcher
+      pokecatcher,
+      pokerunner
     },
     data () {
       return {
@@ -33,7 +36,8 @@
         appMag: false,
         appCal: false,
         appInt: false,
-        pokecatcher: false
+        pokecatcher: false,
+        pokerunner: false
       }
     }
   }

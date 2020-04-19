@@ -9,11 +9,19 @@
                 >
                     <i class="material-icons" v-on:click="btnN.actionBtn">{{btnN.icon}}</i>
                 </li>
-                <li class="blue-grey darken-2 col s12" @click="pokeFunction">
+                <li class="blue-grey darken-2 col s6" @click="pokeFunction">
                     <img
                             id="pokeCatcher"
                             class="responsive-img"
                             src="../assets/images/pokecatcher.png"
+                            alt="PokeCatcher"
+                    >
+                </li>
+                <li class="blue-grey darken-2 col s6" @click="runnerFunction">
+                    <img
+                            id="pokeRunner"
+                            class="responsive-img"
+                            src="../assets/images/pokeSnake.png"
                             alt="PokeCatcher"
                     >
                 </li>
@@ -41,18 +49,28 @@
                 this.$parent.$parent.appAdd ^= true
                 this.$parent.$parent.appMag = false
                 this.$parent.$parent.appCal = false
+                this.$parent.$parent.appInt = false
                 if (this.$parent.$parent.pokecatcher) {
                     document.getElementById('poke_catcher').classList.add('hide')
                     this.$parent.$parent.pokecatcher = false
+                }
+                if (this.$parent.$parent.pokerunner) {
+                    document.getElementById('poke_runner').classList.add('hide')
+                    this.$parent.$parent.pokerunner = false
                 }
             },
             magFunction: function () {
                 this.$parent.$parent.appMag ^= true
                 this.$parent.$parent.appAdd = false
                 this.$parent.$parent.appInt = false
+                this.$parent.$parent.appCal = false
                 if (this.$parent.$parent.pokecatcher) {
                     document.getElementById('poke_catcher').classList.add('hide')
                     this.$parent.$parent.pokecatcher = false
+                }
+                if (this.$parent.$parent.pokerunner) {
+                    document.getElementById('poke_runner').classList.add('hide')
+                    this.$parent.$parent.pokerunner = false
                 }
             },
             calFunction: function () {
@@ -64,6 +82,10 @@
                     document.getElementById('poke_catcher').classList.add('hide')
                     this.$parent.$parent.pokecatcher = false
                 }
+                if (this.$parent.$parent.pokerunner) {
+                    document.getElementById('poke_runner').classList.add('hide')
+                    this.$parent.$parent.pokerunner = false
+                }
             },
             intFunction: function () {
                 this.$parent.$parent.appInt ^= true
@@ -74,6 +96,10 @@
                     document.getElementById('poke_catcher').classList.add('hide')
                     this.$parent.$parent.pokecatcher = false
                 }
+                if (this.$parent.$parent.pokerunner) {
+                    document.getElementById('poke_runner').classList.add('hide')
+                    this.$parent.$parent.pokerunner = false
+                }
             }
             ,
             pokeFunction: function () {
@@ -83,11 +109,31 @@
                 this.$parent.$parent.appCal = false
                 if (this.$parent.$parent.pokecatcher === false) {
                     document.getElementById('poke_catcher').classList.remove('hide')
+                    document.getElementById('poke_runner').classList.add('hide')
                     this.$parent.$parent.pokecatcher = true
+                    this.$parent.$parent.pokerunner = false
                 }
                 else {
                     document.getElementById('poke_catcher').classList.add('hide')
                     this.$parent.$parent.pokecatcher = false
+                }
+
+            },
+
+            runnerFunction: function () {
+                this.$parent.$parent.appInt = false
+                this.$parent.$parent.appAdd = false
+                this.$parent.$parent.appMag = false
+                this.$parent.$parent.appCal = false
+                if (this.$parent.$parent.pokerunner === false) {
+                    document.getElementById('poke_runner').classList.remove('hide')
+                    document.getElementById('poke_catcher').classList.add('hide')
+                    this.$parent.$parent.pokerunner = true
+                    this.$parent.$parent.pokecatcher = false
+                }
+                else {
+                    document.getElementById('poke_runner').classList.add('hide')
+                    this.$parent.$parent.pokerunner = false
                 }
 
             }
@@ -99,7 +145,7 @@
     nav{
         cursor: pointer;
     }
-    #pokeCatcher{
+    #pokeCatcher, #pokeRunner{
         margin-top: 10px;
     }
 </style>
