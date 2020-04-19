@@ -1,7 +1,7 @@
 # Arcade
 ![Generic badge](https://img.shields.io/badge/Vue.js-Phaser_3-black.svg)
 ### **Projet Vue.js & Phaser 3**
-_Ce projet reprend 4 exercices de ma formation._ Ainsi qu'un premier jeu réalisé avec Phaser 3.
+_Ce projet reprend 4 exercices de ma formation._ Ainsi que deux premiers jeux réalisés avec Phaser 3.
 
 ***
 ***
