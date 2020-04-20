@@ -83,6 +83,11 @@ const pokeCatcher = new Phaser.Class({
         this.load.image('poke10', 'images/poke10.png')
         this.load.image('poke11', 'images/poke11.png')
         this.load.image('poke12', 'images/poke12.png')
+
+        life = 3
+        pokeCount = 6
+        score = 0
+        lifePosition = 40
     },
 
     create: function () {
@@ -222,10 +227,6 @@ function gameOver(context)
         gameOverText.setText(`T'es pas le meilleur dresseur\nC'est indégniable\nRetourne cirer les pompes d'Ondine !!\n\nT'es pas à la hauteur gamin..`)
         gameOverTitle.setText(`GAME OVER`)
         restartText.setText(`Cliquez sur l'écran pour rejouer`)
-        life = 3
-        pokeCount = 6
-        score = 0
-        lifePosition = 40
     }
 }
 
@@ -236,11 +237,6 @@ function gameWin(context)
     gameOverText.setText(`Ma Zette\n\nTu sais dégainer tes balls !!`)
     gameOverTitle.setText(`YOU WIN !!`)
     restartText.setText(`Cliquez sur l'écran pour rejouer`)
-    life = 3
-    pokeCount = 6
-    score = 0
-    lifePosition = 40
-
 }
 
 // Hit Paddle for rebounds seem reals
