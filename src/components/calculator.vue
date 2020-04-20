@@ -7,6 +7,7 @@
             </article>
             <div id="app" class="green lighten-2 container">
                 <article class="row valign-wrapper">
+                <!-- Display operator and result -->
                 <span id="operatorStyle">
                     {{operator}}
                 </span>
@@ -15,7 +16,7 @@
                     </h2>
                 </article>
                 <article class="row section">
-
+                    <!-- Add numbers buttons -->
                     <p
                             class="btnCalcul btn-large col s4"
                             v-for="number in numbers"
@@ -24,6 +25,7 @@
                     >
                         {{number}}
                     </p>
+                    <!-- Add operators buttons -->
                     <p
                             class="btnCalcul btn-large blue col s2"
                             v-for="op in ops"
@@ -32,7 +34,7 @@
                     >
                         {{op.opp}}
                     </p>
-
+                    <!-- Remove all variables -->
                     <p
                             class="btnCalcul btn-large red col s2"
                             @click="clear"
@@ -63,7 +65,10 @@
         },
         methods: {
             addNum: function (number) {
+                // Display of number
                 this.displayResult = number
+
+                // Switch if + or - and start
                 switch (this.operator) {
                     case '+':
                         this.result += number
@@ -84,6 +89,7 @@
                 this.displayResult = opp === '=' ? this.result : this.displayResult
             },
             clear: function () {
+                // remove variables
                 this.result = 0
                 this.displayResult = 0
                 this.operator = ''

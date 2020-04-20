@@ -11,7 +11,9 @@
 </template>
 
 <script>
+    // Import navbar component
     import navbar from './navbar'
+
     export default {
         name: 'index',
         components: {

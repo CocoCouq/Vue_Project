@@ -2,6 +2,7 @@
     <nav>
         <div class="nav-wrapper">
             <ul class="row">
+                <!-- for each navbar btn -->
                 <li
                         class="green lighten-2 col s3"
                         v-for="btnN in btnsNavbar"
@@ -9,6 +10,7 @@
                 >
                     <i class="material-icons" v-on:click="btnN.actionBtn">{{btnN.icon}}</i>
                 </li>
+                <!-- FIRST GAME (pong) -->
                 <li class="blue-grey darken-2 col s6" @click="pokeFunction">
                     <img
                             id="pokeCatcher"
@@ -17,6 +19,7 @@
                             alt="PokeCatcher"
                     >
                 </li>
+                <!-- SECOND GAME (snake) -->
                 <li class="blue-grey darken-2 col s6" @click="runnerFunction">
                     <img
                             id="pokeRunner"
@@ -25,6 +28,8 @@
                             alt="PokeCatcher"
                     >
                 </li>
+                <!-- Other project : https://github.com/CocoCouq/axios_Vue_CRUD -->
+                <li id="CRUD" class="blue col s12"><a href="http://localhost:8888/Zone/Vue_CRUD/">CRUD</a></li>
             </ul>
         </div>
     </nav>
@@ -50,6 +55,7 @@
                 this.$parent.$parent.appMag = false
                 this.$parent.$parent.appCal = false
                 this.$parent.$parent.appInt = false
+                // Use materialize class for hide canvas
                 if (this.$parent.$parent.pokecatcher) {
                     document.getElementById('poke_catcher').classList.add('hide')
                     this.$parent.$parent.pokecatcher = false
@@ -147,5 +153,8 @@
     }
     #pokeCatcher, #pokeRunner{
         margin-top: 10px;
+    }
+    #CRUD{
+        font-family: Impact, sans-serif;
     }
 </style>

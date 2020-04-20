@@ -5,12 +5,14 @@
     <magic v-if="appMag"></magic>
     <calculator v-if="appCal"></calculator>
     <changebox v-if="appInt"></changebox>
+    <!-- Use materialize class to hide canvas games -->
     <pokecatcher></pokecatcher>
     <pokerunner></pokerunner>
   </div>
 </template>
 
 <script>
+  // Import all components
   import index from './components/index'
   import addition from './components/addition'
   import magic from './components/magic'
@@ -32,6 +34,7 @@
     },
     data () {
       return {
+        // Navbar value
         appAdd: false,
         appMag: false,
         appCal: false,
