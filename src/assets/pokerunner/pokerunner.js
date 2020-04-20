@@ -66,7 +66,7 @@ const gameoverScene = new Phaser.Class({
         this.load.image('logoSnake', 'images/logo_pokeSnake.png')
     },
     create: function () {
-        // If player click, change to game scene
+        // If player click, change to boot scene
         this.input.on('pointerup', function (pointer) {
             this.scene.start('startScene');
         }, this);
@@ -108,7 +108,10 @@ const pokeSnake = new Phaser.Class({
 
     create: function () {
 
+        // Add physicals element to eat
         this.ball = this.physics.add.image(200, 100, 'ball').setCollideWorldBounds(true).setImmovable(true)
+
+        // Init display score
         scoreText = this.add.text(16, 16, `Score: ${score}`, {fontSize: '32px', fill: 'rgba(17,17,17,0.71)'})
 
         // Head animation
@@ -145,13 +148,14 @@ const pokeSnake = new Phaser.Class({
             })
         })
 
-        // Call class for create the snake in the center of map
-        // Call ball before for poke walk up the ball
+        // Call class for create the snake
         snake = new Snake(this, 70, 100)
 
+        // Create a relation between snake class and game scene
         this.physics.overlap(this, snake);
+        // For create a collider constraint between food and snake
         this.physics.add.collider(this.ball, snake.body, catchBall)
-
+        // Create the cursor who contain players actions
         cursors = this.input.keyboard.createCursorKeys();
     },
 
@@ -196,7 +200,6 @@ const pokeSnake = new Phaser.Class({
             }
         }
 
-        // Check collision whith ball
         snake.update(time)
     }
 
@@ -212,22 +215,26 @@ const CONFIG = {
     physics: {
         default: 'arcade',
         arcade: {
+            // You can uncomment debug: true to have more informations to the physicals contraints
             // debug: true
         },
     }
 };
 
 function catchBall(ball, scene) {
+    // Change location of the next ball
     ball.body.x = (Math.random()*740) + 30
     ball.body.y = (Math.random()*440) + 30
+    // Create a new part for the tail snake
     snake.grow()
+    // Update score
     score++
     scoreText.setText(`Score: ${score}`)
 }
 
 ////////////////////////////////////////////////////////////////////
 
-// Create a Snake class for diffents parts of snake
+// Create a Snake class for differents parts of snake
 const Snake = new Phaser.Class({
 
     initialize: function Snake (scene, x, y) {
@@ -246,9 +253,6 @@ const Snake = new Phaser.Class({
         // Start alive
         this.alive = true;
 
-        // Default speed (Make more to slowly)
-        this.speed = 100;
-
         // Move time for the body follow head
         this.moveTime = 0;
 
@@ -263,7 +267,7 @@ const Snake = new Phaser.Class({
 
     update: function (time)
     {
-        // Recover the time to move
+        // Move where the time to move isn't ok
         if (time >= this.moveTime)
         {
             return this.move(time);
@@ -276,6 +280,7 @@ const Snake = new Phaser.Class({
         switch (this.heading)
         {
             case LEFT:
+                // If direction is left reduce x poisition
                 this.headPosition.x = Phaser.Math.Wrap(this.headPosition.x - 0.005, -0.01, 0.52);
                 break;
 
@@ -297,13 +302,9 @@ const Snake = new Phaser.Class({
         //  Update the body segments
         Phaser.Actions.ShiftPosition(this.body.getChildren(), this.headPosition.x * 1500, this.headPosition.y * 1500, 1, this.tail);
 
-        //  Update the timer ready for the next movement with the velocity
+        //  Check if the head touch body. If return true, the head is on the body
         let hitBody = Phaser.Actions.GetFirst(this.body.getChildren(), { x: this.head.x, y: this.head.y }, 1);
-
-        if (hitBody)
-        {
-            console.log('dead');
-
+        if (hitBody) {
             this.alive = false;
         }
         else {
@@ -315,6 +316,7 @@ const Snake = new Phaser.Class({
 
     grow: function ()
     {
+        // Create new part of body snake
         newPoke[score] = this.body.create(this.tail.x, this.tail.y, 'snake').setSize(5,5);
         newPoke[score].setOrigin(0);
     }

@@ -9,7 +9,3 @@
         name: "pokerunner"
     }
 </script>
-
-<style scoped>
-
-</style>

@@ -10,7 +10,3 @@
         name: "pokecatcher"
     }
 </script>
-
-<style scoped>
-
-</style>
